@@ -1,0 +1,6 @@
+customer_id,customer_name,email,signup_date,acquisition_campaign_id,updated_at
+1,Anna Andersson,anna@example.com,2024-01-10,101,2026-01-01
+2,Bjorn Svensson,bjorn@example.com,2024-02-14,102,2026-01-01
+3,Carla Nilsson,carla@example.com,2024-03-01,101,2026-01-01
+4,David Eriksson,david@example.com,2024-04-20,103,2026-01-01
+5,Emma Johansson,emma@example.com,2024-05-11,102,2026-01-01

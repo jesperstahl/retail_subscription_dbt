@@ -1,0 +1,31 @@
+version: 2
+
+models:
+
+  - name: fact_subscriptions
+
+    columns:
+
+      - name: subscription_id
+
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+      - name: subscription_status
+
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - ACTIVE
+                  - PAUSED
+                  - CANCELLED

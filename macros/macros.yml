@@ -1,0 +1,56 @@
+version: 2
+
+macros:
+
+  - name: total_revenue
+
+    description: >
+      Calculates total revenue by aggregating the supplied revenue column.
+      Used across finance and customer analytics models to ensure
+      consistent revenue calculations.
+
+    arguments:
+
+      - name: revenue_column
+
+        type: string
+
+        description: >
+          Name of the revenue column to aggregate.
+
+  - name: active_customers
+
+    description: >
+      Counts active customers based on a supplied customer status column.
+      Used in customer KPI and retention reporting.
+
+    arguments:
+
+      - name: status_column
+
+        type: string
+
+        description: >
+          Column containing customer or subscription status values.
+
+  - name: churn_rate
+
+    description: >
+      Calculates churn percentage as cancelled subscriptions divided
+      by total active subscriptions.
+
+    arguments:
+
+      - name: cancelled_customers
+
+        type: numeric
+
+        description: >
+          Number of cancelled customers or subscriptions.
+
+      - name: active_customers
+
+        type: numeric
+
+        description: >
+          Number of active customers or subscriptions used as denominator.

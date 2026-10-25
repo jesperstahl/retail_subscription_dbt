@@ -1,0 +1,56 @@
+name: 'retail_subscription_dbt'
+version: '1.0.0'
+
+profile: 'retail_subscription_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+
+  retail_subscription_dbt:
+
+    staging:
+      +materialized: view
+      +tags: ["staging"]
+
+    core:
+      +materialized: table
+      +tags: ["core"]
+
+    marts:
+
+      finance:
+        +materialized: table
+        +tags: ["finance"]
+
+      customer:
+        +materialized: table
+        +tags: ["customer"]
+
+      subscription:
+        +materialized: table
+        +tags: ["subscription"]
+
+      marketing:
+        +materialized: table
+        +tags: ["marketing"]
+
+snapshots:
+
+  retail_subscription_dbt:
+    +target_schema: snapshots
+
+seeds:
+
+  retail_subscription_dbt:
+    +schema: raw

@@ -1,0 +1,124 @@
+version: 2
+
+sources:
+
+  - name: ecommerce
+
+    description: >
+      Raw ecommerce transaction data including customer orders,
+      products and returns.
+
+    database: "{{ target.database }}"
+    schema: retail_subscription
+
+    freshness:
+
+      warn_after:
+        count: 12
+        period: hour
+
+      error_after:
+        count: 24
+        period: hour
+
+    loaded_at_field: updated_at
+
+    tables:
+
+      - name: orders
+
+        description: Raw ecommerce orders.
+
+        columns:
+
+          - name: order_id
+            description: Unique order identifier.
+
+          - name: customer_id
+            description: Customer placing the order.
+
+      - name: products
+
+        description: Product catalog.
+
+      - name: returns
+
+        description: Product returns and refunds.
+
+  - name: customers
+
+    description: >
+      Raw customer master data.
+
+    database: "{{ target.database }}"
+    schema: retail_subscription
+
+    freshness:
+
+      warn_after:
+        count: 12
+        period: hour
+
+      error_after:
+        count: 24
+        period: hour
+
+    loaded_at_field: updated_at
+
+    tables:
+
+      - name: customers
+
+        description: Customer profile records.
+
+  - name: subscriptions
+
+    description: >
+      Raw subscription management data.
+
+    database: "{{ target.database }}"
+    schema: retail_subscription
+
+    freshness:
+
+      warn_after:
+        count: 12
+        period: hour
+
+      error_after:
+        count: 24
+        period: hour
+
+    loaded_at_field: updated_at
+
+    tables:
+
+      - name: subscriptions
+
+        description: Subscription lifecycle records.
+
+  - name: marketing
+
+    description: >
+      Marketing campaign source data.
+
+    database: "{{ target.database }}"
+    schema: retail_subscription
+
+    freshness:
+
+      warn_after:
+        count: 12
+        period: hour
+
+      error_after:
+        count: 24
+        period: hour
+
+    loaded_at_field: updated_at
+
+    tables:
+
+      - name: campaigns
+
+        description: Marketing campaigns and spend data.

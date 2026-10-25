@@ -1,0 +1,155 @@
+version: 2
+
+models:
+
+  - name: stg_customers
+
+    description: >
+      Cleaned customer source data standardized for downstream processing.
+
+    columns:
+
+      - name: customer_id
+
+        description: Unique customer identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: email
+
+        description: Customer email address.
+
+        tests:
+          - not_null
+
+  - name: stg_orders
+
+    description: >
+      Cleaned ecommerce order transactions.
+
+    columns:
+
+      - name: order_id
+
+        description: Unique order identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+
+        description: Customer identifier.
+
+        tests:
+          - not_null
+
+      - name: order_amount
+
+        description: Total order amount.
+
+        tests:
+          - not_null
+
+  - name: stg_products
+
+    description: >
+      Standardized product catalog.
+
+    columns:
+
+      - name: product_id
+
+        description: Unique product identifier.
+
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_returns
+
+    description: >
+      Processed return transactions.
+
+    columns:
+
+      - name: return_id
+
+        description: Unique return identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+
+        description: Associated order identifier.
+
+        tests:
+          - not_null
+
+  - name: stg_subscriptions
+
+    description: >
+      Standardized subscription records.
+
+    columns:
+
+      - name: subscription_id
+
+        description: Unique subscription identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+
+        description: Customer identifier.
+
+        tests:
+          - not_null
+
+      - name: subscription_status
+
+        description: Status of subscription.
+
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - ACTIVE
+                  - PAUSED
+                  - CANCELLED
+
+  - name: stg_campaigns
+
+    description: >
+      Marketing campaign records prepared for analytics.
+
+    columns:
+
+      - name: campaign_id
+
+        description: Unique campaign identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: channel
+
+        description: Marketing channel.
+
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - EMAIL
+                  - SOCIAL
+                  - SEARCH
+                  - AFFILIATE
+                  - DISPLAY
+                  - DIRECT

@@ -1,0 +1,122 @@
+version: 2
+
+models:
+
+  - name: int_customers
+
+    description: >
+      Integrated customer model combining customer,
+      order and subscription information.
+
+    columns:
+
+      - name: customer_id
+
+        description: Unique customer identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: current_subscription_status
+
+        description: Current customer subscription status.
+
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - ACTIVE
+                  - PAUSED
+                  - CANCELLED
+
+  - name: int_orders
+
+    description: >
+      Integrated order model enriched with return information
+      and net revenue calculations.
+
+    columns:
+
+      - name: order_id
+
+        description: Unique order identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+
+        description: Customer identifier.
+
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id 
+
+  - name: int_subscriptions
+
+    description: >
+      Subscription model used for churn, renewal
+      and retention calculations.
+
+    columns:
+
+      - name: subscription_id
+
+        description: Unique subscription identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+
+        description: Customer identifier.
+
+        tests:
+          - not_null
+
+      - name: subscription_status
+
+        description: Current state of subscription.
+
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - ACTIVE
+                  - PAUSED
+                  - CANCELLED
+
+  - name: int_marketing
+
+    description: >
+      Marketing attribution and acquisition model used
+      for CAC and campaign performance reporting.
+
+    columns:
+
+      - name: campaign_id
+
+        description: Unique campaign identifier.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: campaign_cost
+
+        description: Campaign spend.
+
+        tests:
+          - not_null
+
+      - name: acquired_customers
+
+        description: Number of customers acquired through campaign.
+
+        tests:
+          - not_null

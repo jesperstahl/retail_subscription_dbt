@@ -1,0 +1,5 @@
+product_id,product_name,product_category,product_price,updated_at
+1001,Basic Subscription,Subscription,99.00,2026-01-01
+1002,Premium Subscription,Subscription,199.00,2026-01-01
+1003,Annual Subscription,Subscription,999.00,2026-01-01
+1004,Gift Package,Addon,49.00,2026-01-01

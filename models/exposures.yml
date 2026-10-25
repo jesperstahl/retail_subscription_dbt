@@ -1,0 +1,64 @@
+version: 2
+
+exposures:
+
+  - name: executive_dashboard
+
+    label: Executive KPI Dashboard
+
+    type: dashboard
+
+    maturity: high
+
+    owner:
+      name: BI Team
+      email: bi-team@company.com
+
+    depends_on:
+      - ref('fact_revenue')
+      - ref('fact_churn')
+      - ref('fact_customer_metrics')
+      - ref('fact_marketing_performance')
+
+    description: >
+      Executive dashboard containing revenue, churn,
+      retention and customer performance KPIs.
+
+  - name: finance_dashboard
+
+    label: Finance Dashboard
+
+    type: dashboard
+
+    maturity: high
+
+    owner:
+      name: Finance Analytics
+      email: finance@company.com
+
+    depends_on:
+      - ref('fact_revenue')
+      - ref('fact_orders')
+
+    description: >
+      Finance reporting dashboard used for revenue
+      and order performance analysis.
+
+  - name: marketing_dashboard
+
+    label: Marketing Performance Dashboard
+
+    type: dashboard
+
+    maturity: medium
+
+    owner:
+      name: Marketing Analytics
+      email: marketing@company.com
+
+    depends_on:
+      - ref('fact_marketing_performance')
+
+    description: >
+      Campaign performance dashboard used for CAC,
+      acquisition and channel analysis.

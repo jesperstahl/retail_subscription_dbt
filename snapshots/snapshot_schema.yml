@@ -1,0 +1,103 @@
+version: 2
+
+snapshots:
+
+  - name: subscriptions_snapshot
+
+    description: >
+      Historical snapshot of subscription records used to track
+      subscription lifecycle changes over time, including status,
+      plan changes, renewals and cancellations. Supports churn,
+      retention and subscription trend reporting.
+
+    meta:
+      owner: subscription_analytics_team
+      business_owner: customer_success_team
+      data_domain: subscriptions
+      criticality: high
+
+    columns:
+
+      - name: subscription_id
+
+        description: Unique identifier for the subscription.
+
+        tests:
+          - not_null
+
+      - name: customer_id
+
+        description: Unique identifier for the customer.
+
+        tests:
+          - not_null
+
+      - name: subscription_status
+
+        description: Current status of the subscription.
+
+      - name: plan_type
+
+        description: Subscription plan assigned to the customer.
+
+      - name: start_date
+
+        description: Subscription start date.
+
+      - name: renewal_date
+
+        description: Next renewal date for the subscription.
+
+      - name: end_date
+
+        description: Subscription cancellation or termination date.
+
+      - name: dbt_valid_from
+
+        description: Timestamp indicating when this version became valid.
+
+      - name: dbt_valid_to
+
+        description: Timestamp indicating when this version ceased to be valid.
+
+  - name: customers_snapshot
+
+    description: >
+      Historical snapshot of customer records used to track customer
+      attribute changes over time. Enables auditing and historical
+      customer analysis.
+
+    meta:
+      owner: customer_analytics_team
+      business_owner: customer_success_team
+      data_domain: customers
+      criticality: medium
+
+    columns:
+
+      - name: customer_id
+
+        description: Unique identifier for the customer.
+
+        tests:
+          - not_null
+
+      - name: customer_name
+
+        description: Customer name.
+
+      - name: email
+
+        description: Customer email address.
+
+      - name: signup_date
+
+        description: Date the customer registered.
+
+      - name: dbt_valid_from
+
+        description: Timestamp indicating when this version became valid.
+
+      - name: dbt_valid_to
+
+        description: Timestamp indicating when this version ceased to be valid.

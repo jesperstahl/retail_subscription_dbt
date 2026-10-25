@@ -1,0 +1,96 @@
+version: 2
+
+models:
+
+  - name: fact_marketing_performance
+
+    description: >
+      Marketing performance fact table containing campaign-level
+      customer acquisition metrics used by Marketing, Finance and
+      Executive reporting. The model supports customer acquisition
+      analysis, campaign effectiveness monitoring, customer acquisition
+      cost (CAC) tracking and marketing channel performance reporting.
+
+    config:
+      tags:
+        - marketing
+        - finance
+        - kpi
+        - executive_reporting
+
+    meta:
+      owner: marketing_analytics_team
+      business_owner: chief_marketing_officer
+      data_domain: marketing
+      refresh_frequency: daily
+      criticality: high
+
+    columns:
+
+      - name: campaign_id
+
+        description: >
+          Unique identifier for the marketing campaign.
+
+        tests:
+          - unique
+          - not_null
+
+      - name: campaign_name
+
+        description: >
+          Human-readable marketing campaign name.
+
+        tests:
+          - not_null
+
+      - name: channel
+
+        description: >
+          Marketing acquisition channel responsible for the campaign.
+
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - EMAIL
+                  - SOCIAL
+                  - SEARCH
+                  - AFFILIATE
+                  - DISPLAY
+                  - DIRECT
+
+      - name: campaign_cost
+
+        description: >
+          Total marketing spend allocated to the campaign.
+
+        tests:
+          - not_null
+
+      - name: acquired_customers
+
+        description: >
+          Number of new customers attributed to the campaign.
+
+        tests:
+          - not_null
+
+      - name: customer_acquisition_cost
+
+        description: >
+          Customer Acquisition Cost (CAC), calculated as campaign cost
+          divided by acquired customers.
+
+        tests:
+          - not_null
+
+      - name: acquisition_share_pct
+
+        description: >
+          Percentage contribution of the campaign to the total number
+          of acquired customers across all campaigns.
+
+        tests:
+          - not_null

@@ -9,7 +9,7 @@ sources:
       products and returns.
 
     database: "{{ target.database }}"
-    schema: retail_subscription
+    schema: retail_subscription_raw
 
     freshness:
 
@@ -51,7 +51,7 @@ sources:
       Raw customer master data.
 
     database: "{{ target.database }}"
-    schema: retail_subscription
+    schema: retail_subscription_raw
 
     freshness:
 
@@ -77,7 +77,7 @@ sources:
       Raw subscription management data.
 
     database: "{{ target.database }}"
-    schema: retail_subscription
+    schema: retail_subscription_raw
 
     freshness:
 
@@ -103,7 +103,7 @@ sources:
       Marketing campaign source data.
 
     database: "{{ target.database }}"
-    schema: retail_subscription
+    schema: retail_subscription_raw
 
     freshness:
 

@@ -14,6 +14,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+
+      postgres:
+        image: postgres:16
+
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres_demo
+
+        ports:
+          - 5432:5432
+
     steps:
 
       - uses: actions/checkout@v4
@@ -25,6 +38,41 @@ jobs:
 
       - run: pip install dbt-postgres
 
-      - run: dbt deps
+      - name: Create dbt profile
+
+        run: |
+          mkdir -p ~/.dbt
+
+          cat > ~/.dbt/profiles.yml << EOF
+          retail_subscription_dbt:
+            target: dev
+
+            outputs:
+              dev:
+                type: postgres
+                host: localhost
+                user: postgres
+                password: postgres
+                port: 5432
+                dbname: postgres_demo
+                schema: retail_subscription
+                threads: 4
+          EOF
+
+      - run: dbt seed
 
       - run: dbt build
+
+      - run: dbt docs generate
+
+      - name: Upload dbt artifacts
+
+        uses: actions/upload-artifact@v4
+
+        with:
+          name: dbt-artifacts
+
+          path: |
+            target/manifest.json
+            target/catalog.json
+            target/run_results.json
